@@ -1,26 +1,149 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Use next-themes' class attribute for dark/light switching */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------ */
+/* Theme tokens — Forest Black / Forest Green / Copper / Warm Ivory    */
+/* ------------------------------------------------------------------ */
+:root,
+.dark {
+  --background: #101c18;
+  --surface: #1d3028;
+  --surface-2: #24382f;
+  --accent: #c47b55;
+  --accent-soft: rgba(196, 123, 85, 0.14);
+  --foreground: #f4f1e8;
+  --muted: #9cafa5;
+  --border: rgba(244, 241, 232, 0.1);
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-muted: var(--muted);
+  --color-border: var(--border);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --animate-marquee: marquee var(--marquee-duration, 45s) linear infinite;
+  --animate-drift: drift 18s ease-in-out infinite;
+  --animate-drift-slow: drift 28s ease-in-out infinite;
+  --animate-pulse-soft: pulse-soft 5s ease-in-out infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @keyframes drift {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(40px, -32px, 0) scale(1.12);
+    }
+  }
+
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 0.55;
+    }
+    50% {
+      opacity: 1;
+    }
   }
 }
 
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+/* Lenis owns smooth scrolling — do not set CSS scroll-behavior: smooth */
+html {
+  scroll-padding-top: 6rem;
+}
+
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: #c47b55;
+  color: #101c18;
+}
+
+/* ------------------------------------------------------------------ */
+/* Lenis smooth scrolling (recommended base styles)                    */
+/* ------------------------------------------------------------------ */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------------ */
+/* Custom utilities                                                    */
+/* ------------------------------------------------------------------ */
+@utility text-gradient {
+  background-image: linear-gradient(120deg, #f4f1e8 0%, #c47b55 55%, #e0a184 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Immersive custom cursor (blend-mode inversion)                      */
+/* Only hides the native cursor on fine pointers for users who have    */
+/* NOT asked for reduced motion. Touch devices and reduced-motion users */
+/* always keep the system cursor. Text fields keep the caret cursor.    */
+/* ------------------------------------------------------------------ */
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  html.custom-cursor-active,
+  html.custom-cursor-active * {
+    cursor: none !important;
+  }
+
+  html.custom-cursor-active :is(input, textarea, [contenteditable="true"]) {
+    cursor: text !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

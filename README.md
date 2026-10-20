@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Moniruzzaman Tasrif — Portfolio
 
-## Getting Started
+A high-end, interactive full-stack developer portfolio built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, and Framer Motion.
 
-First, run the development server:
+**Palette:** Forest Black `#101C18` · Forest Green `#1D3028` · Copper `#C47B55` · Warm Ivory `#F4F1E8`
+
+## Stack
+
+- **Framework:** Next.js 16 (App Router, Turbopack, Cache Components)
+- **Styling:** Tailwind CSS v4, Lucide React icons
+- **Animation:** Framer Motion, Lenis smooth scroll
+- **Theme:** next-themes (class strategy, dark default)
+
+## Interactive features
+
+| Feature | Implementation |
+| --- | --- |
+| Mouse-follow spotlight | `src/components/ui/mouse-spotlight.tsx` — spring-tracked radial gradient (fine pointers + motion-safe only) |
+| Ambient hero glow | `src/components/sections/hero.tsx` — drifting blurred orbs + grid overlay |
+| Scroll reveal | `src/components/ui/reveal.tsx` — spring fade-up via `whileInView` (`Reveal`, `RevealGroup`, `RevealItem`) |
+| Magnetic buttons | `src/components/ui/magnetic-button.tsx` — cursor-pull spring wrapper |
+| 3D tilt cards | `src/components/ui/tilt-card.tsx` — perspective tilt + Copper border glow tracking the pointer |
+| Infinite marquee | `src/components/ui/marquee.tsx` — CSS `-50%` loop, edge fades, pauses on hover |
+| Theme switcher | `src/components/providers/theme-provider.tsx` — smooth background/text color transitions |
+| Custom cursor | `src/components/ui/custom-cursor.tsx` — blend-mode inversion cursor with lerp-spring follow, hover/press states, immersive on desktop |
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
+npm run lint     # eslint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Customizing
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Content:** edit `src/lib/data.ts` (tech stack, skill groups, projects, social links)
+- **Colors / theme tokens:** `src/app/globals.css` (`:root, .dark` and `.light` blocks)
+- **Contact form:** currently simulates a submit — wire `handleSubmit` in `src/components/sections/contact.tsx` to an API route or form service
+- **Social URLs:** update `socialLinks` in `src/lib/data.ts`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Notes
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Lucide v1 removed brand icons, so GitHub/LinkedIn are custom SVGs in `src/components/icons.tsx`.
+- Global CSS `scroll-behavior: smooth` is intentionally omitted — Lenis owns scrolling, and anchor links are handled with a navbar offset (`anchors: { offset: -80 }`).
+- All motion respects `prefers-reduced-motion` via `MotionConfig reducedMotion="user"`.
+- The custom cursor only hides the native cursor on fine pointers (`pointer: fine`) without reduced motion — touch devices and a11y preferences keep the system cursor, and text inputs keep the caret.
