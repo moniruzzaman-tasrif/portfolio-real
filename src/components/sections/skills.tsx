@@ -30,9 +30,7 @@ export function Skills() {
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           id="skills-heading"
-          eyebrow="Skills & Stack"
-          title="The Tools I Engineer With."
-          description="A modern full-stack toolkit — type-safe interfaces on the front, resilient APIs and data models on the back."
+          title="Skills"
           align="center"
         />
       </div>

@@ -211,7 +211,7 @@ export function Hero() {
       <AmbientGlow />
 
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-10 sm:gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
+        <div className="grid items-center gap-10 sm:gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -225,24 +225,26 @@ export function Hero() {
               </span>
             </motion.div>
 
+            <motion.p
+              variants={itemVariants}
+              className="max-w-xl font-bold text-sm sm:text-base lg:text-lg leading-relaxed text-muted"
+            >
+              HELLO, I'M
+            </motion.p>
+
             <motion.h1
+              id="hero-heading"
               variants={itemVariants}
               className="text-3xl min-[400px]:text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground text-balance leading-[1.18]"
             >
-              Crafting Scalable Web Experiences Built for{" "}
-              <span className="text-gradient">Real-World Impact</span>.
+              Moniruzzaman <span className="text-gradient">Tasrif</span>
             </motion.h1>
 
             <motion.p
               variants={itemVariants}
               className="max-w-xl text-sm sm:text-base lg:text-lg leading-relaxed text-muted"
             >
-              Hi, I&apos;m{" "}
-              <span className="font-semibold text-foreground">
-                Moniruzzaman Tasrif
-              </span>
-              . I architect fast, modern, and user-focused web applications with
-              Next.js, TypeScript, and Node.js.
+              Full-Stack Web Developer crafting responsive frontends and secure, scalable backends — taking your ideas from concept to orbit.
             </motion.p>
 
             <motion.div

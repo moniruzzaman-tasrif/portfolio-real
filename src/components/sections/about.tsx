@@ -36,8 +36,7 @@ export function About() {
     >
       <SectionHeading
         id="about-heading"
-        eyebrow="About Me"
-        title="Engineering Scalable Web Products with Purpose."
+        title="About Me"
       />
 
       <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">

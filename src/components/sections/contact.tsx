@@ -61,9 +61,7 @@ export function Contact() {
       <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           id="contact-heading"
-          eyebrow="Get in Touch"
-          title="Let's Build Something That Lasts."
-          description="Have a project in mind, or just want to talk shop about the modern web stack? My inbox is always open."
+          title="Contact"
           align="center"
         />
 

@@ -1,3 +1,4 @@
+import type { StaticImageData } from "next/image";
 import type { LucideIcon } from "lucide-react";
 import {
   Atom,
@@ -18,6 +19,9 @@ import {
   Wrench,
 } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
+import fitlogImg from "@/assets/fitlog.png";
+import bazarImg from "@/assets/bazar.png";
+import devstackImg from "@/assets/divstack.png";
 
 export type Tech = {
   name: string;
@@ -81,42 +85,46 @@ export type Project = {
   repoUrl: string;
   gradient: string;
   icon: LucideIcon;
+  image?: StaticImageData;
 };
 
-/** Featured projects (placeholders — swap titles, copy and links). */
+/** Featured projects */
 export const projects: Project[] = [
   {
-    title: "Project Alpha",
-    tagline: "SaaS Analytics Platform",
+    title: "FitLog",
+    tagline: "Fitness Tracking Application",
     description:
-      "A multi-tenant analytics dashboard with real-time charts, role-based access powered by Better Auth, and a fully typed Next.js App Router codebase.",
-    tech: ["Next.js", "TypeScript", "MongoDB", "Better Auth"],
-    liveUrl: "#",
-    repoUrl: "#",
+      "A fitness tracking application for recording workouts, exploring exercises, and monitoring fitness progress.",
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "DaisyUI"],
+    liveUrl: "https://fitlog-theta-lyart.vercel.app/",
+    repoUrl: "https://github.com/moniruzzaman-tasrif/fitlog",
     gradient: "from-[#C47B55]/40 via-[#1D3028] to-[#101C18]",
-    icon: Layers,
+    icon: Terminal,
+    image: fitlogImg,
   },
   {
-    title: "Project Beta",
-    tagline: "E-Commerce Experience",
+    title: "BazarDor",
+    tagline: "E-Commerce Platform",
     description:
-      "A headless storefront with cart state, server-side rendering for SEO, and buttery 60fps interactions built with Framer Motion and Tailwind CSS.",
-    tech: ["React", "Next.js", "Express.js", "Framer Motion"],
-    liveUrl: "#",
-    repoUrl: "#",
+      "An e-commerce platform designed to provide a convenient online shopping experience with product discovery and category browsing.",
+    tech: ["Next.js", "React", "TypeScript", "MongoDB", "Better Auth", "Tailwind CSS"],
+    liveUrl: "https://bazar-one-jade.vercel.app/",
+    repoUrl: "https://github.com/moniruzzaman-tasrif/BazarDor",
     gradient: "from-[#2f5c48]/60 via-[#1D3028] to-[#101C18]",
     icon: Blocks,
+    image: bazarImg,
   },
   {
-    title: "Project Gamma",
-    tagline: "Collaboration Suite",
+    title: "Dev Stack",
+    tagline: "Developer Resource Platform",
     description:
-      "A real-time team workspace with shared documents, optimistic UI updates, and a MongoDB aggregation layer feeding live activity feeds.",
-    tech: ["Node.js", "MongoDB", "TypeScript", "WebSockets"],
-    liveUrl: "#",
-    repoUrl: "#",
+      "A developer-focused platform for presenting programming technologies, development tools, and technical resources.",
+    tech: ["Vite", "React", "TypeScript", "Tailwind CSS", "DaisyUI"],
+    liveUrl: "https://dev-stack-lac.vercel.app/",
+    repoUrl: "https://github.com/moniruzzaman-tasrif/dev-stack",
     gradient: "from-[#8a5a3c]/40 via-[#1D3028] to-[#101C18]",
-    icon: Database,
+    icon: Layers,
+    image: devstackImg,
   },
 ];
 
