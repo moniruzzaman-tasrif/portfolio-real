@@ -25,9 +25,9 @@ export function Skills() {
     <section
       id="skills"
       aria-labelledby="skills-heading"
-      className="relative scroll-mt-24 border-y border-border bg-surface/40 py-24 sm:py-32"
+      className="relative scroll-mt-24 border-y border-border bg-surface/40 py-16 sm:py-24 lg:py-32"
     >
-      <div className="mx-auto w-full max-w-6xl px-6">
+      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           id="skills-heading"
           eyebrow="Skills & Stack"
@@ -56,12 +56,12 @@ export function Skills() {
       </div>
 
       {/* Grouped skill cards */}
-      <div className="mx-auto mt-16 w-full max-w-6xl px-6">
+      <div className="mx-auto mt-12 sm:mt-16 w-full max-w-6xl px-4 sm:px-6 lg:px-8">
         <RevealGroup className="grid gap-6 md:grid-cols-3">
           {skillGroups.map((group) => (
             <RevealItem
               key={group.title}
-              className="group flex flex-col gap-5 rounded-2xl bg-background p-7 ring-1 ring-border transition-all duration-300 hover:-translate-y-1 hover:ring-accent/40"
+              className="group flex flex-col gap-5 rounded-2xl bg-background p-5 sm:p-7 ring-1 ring-border transition-all duration-300 hover:-translate-y-1 hover:ring-accent/40"
             >
               <div className="flex items-center gap-3">
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent ring-1 ring-accent/25 transition-all duration-300 group-hover:bg-accent group-hover:text-background">

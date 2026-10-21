@@ -7,6 +7,7 @@ import {
   useReducedMotion,
   useSpring,
 } from "framer-motion";
+import { useMediaQuery } from "@/lib/hooks";
 import { cn } from "@/lib/cn";
 
 type MagneticButtonProps = {
@@ -27,6 +28,8 @@ export function MagneticButton({
 }: MagneticButtonProps) {
   const ref = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion();
+  const isFinePointer = useMediaQuery("(pointer: fine)");
+  const enabled = isFinePointer && !reducedMotion;
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -35,7 +38,7 @@ export function MagneticButton({
   const springY = useSpring(y, { stiffness: 220, damping: 18, mass: 0.3 });
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (reducedMotion || !ref.current) return;
+    if (!enabled || !ref.current) return;
     const { left, top, width, height } = ref.current.getBoundingClientRect();
     x.set((event.clientX - (left + width / 2)) * strength);
     y.set((event.clientY - (top + height / 2)) * strength);
@@ -51,7 +54,7 @@ export function MagneticButton({
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={reset}
-      style={reducedMotion ? undefined : { x: springX, y: springY }}
+      style={enabled ? { x: springX, y: springY } : undefined}
       className={cn("inline-block", className)}
     >
       {children}

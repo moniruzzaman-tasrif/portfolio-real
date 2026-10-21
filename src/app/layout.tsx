@@ -21,9 +21,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Moniruzzaman Tasrif — Full-Stack Web Developer",
+  metadataBase: new URL("https://moniruzzaman.dev"),
+  title: "Moniruzzaman Tasrif",
   description:
     "Portfolio of Moniruzzaman Tasrif, a full-stack web developer crafting scalable, high-performance web experiences with Next.js, TypeScript, and Node.js.",
+  icons: {
+    icon: [
+      { url: "/avatar.png", sizes: "32x32" },
+      { url: "/avatar.png", sizes: "192x192" },
+      { url: "/favicon.ico" },
+    ],
+    shortcut: "/avatar.png",
+    apple: "/avatar.png",
+  },
   keywords: [
     "Full-Stack Developer",
     "Next.js",
@@ -34,7 +44,7 @@ export const metadata: Metadata = {
     "Portfolio",
   ],
   openGraph: {
-    title: "Moniruzzaman Tasrif — Full-Stack Web Developer",
+    title: "Moniruzzaman Tasrif",
     description:
       "Crafting scalable web experiences built for real-world impact.",
     type: "website",
@@ -56,7 +66,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               <MouseSpotlight />
               <CustomCursor />
               <Navbar />
-              <main className="relative z-10">{children}</main>
+              <main className="relative z-10 w-full overflow-x-hidden">{children}</main>
               <Footer />
             </SmoothScroll>
           </MotionProvider>

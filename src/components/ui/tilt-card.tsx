@@ -9,6 +9,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
+import { useMediaQuery } from "@/lib/hooks";
 import { cn } from "@/lib/cn";
 
 type TiltCardProps = {
@@ -25,6 +26,8 @@ type TiltCardProps = {
 export function TiltCard({ children, className, maxTilt = 7 }: TiltCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion();
+  const isFinePointer = useMediaQuery("(pointer: fine)");
+  const enabled = isFinePointer && !reducedMotion;
 
   const rotateX = useMotionValue(0);
   const rotateY = useMotionValue(0);
@@ -40,7 +43,7 @@ export function TiltCard({ children, className, maxTilt = 7 }: TiltCardProps) {
   const copperGlow = useMotionTemplate`radial-gradient(340px circle at ${glareX} ${glareY}, rgba(196, 123, 85, 0.55), transparent 45%)`;
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (reducedMotion || !ref.current) return;
+    if (!enabled || !ref.current) return;
     const { left, top, width, height } = ref.current.getBoundingClientRect();
     const px = (event.clientX - left) / width - 0.5;
     const py = (event.clientY - top) / height - 0.5;
@@ -59,13 +62,13 @@ export function TiltCard({ children, className, maxTilt = 7 }: TiltCardProps) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={
-        reducedMotion
-          ? undefined
-          : {
+        enabled
+          ? {
               rotateX: springRotateX,
               rotateY: springRotateY,
               transformPerspective: 1000,
             }
+          : undefined
       }
       className={cn(
         "group relative rounded-2xl will-change-transform",

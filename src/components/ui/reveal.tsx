@@ -28,7 +28,7 @@ export function Reveal({
       className={className}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "0px 0px -20px 0px", amount: 0.1 }}
       transition={{ type: "spring", stiffness: 90, damping: 18, delay }}
     >
       {children}
@@ -67,7 +67,7 @@ export function RevealGroup({
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "0px 0px -20px 0px", amount: 0.1 }}
     >
       {children}
     </motion.div>

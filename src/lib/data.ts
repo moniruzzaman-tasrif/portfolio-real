@@ -123,17 +123,17 @@ export const projects: Project[] = [
 export const socialLinks = [
   {
     name: "GitHub",
-    href: "https://github.com/",
+    href: "https://github.com/moniruzzaman-tasrif",
     icon: GithubIcon,
   },
   {
     name: "LinkedIn",
-    href: "https://www.linkedin.com/",
+    href: "https://www.linkedin.com/in/moniruzzaman-tasrif/",
     icon: LinkedinIcon,
   },
   {
     name: "Email",
-    href: "mailto:hello@moniruzzaman.dev",
+    href: "mailto:moniruzzamantasrif1@gmail.com",
     icon: Mail,
   },
 ] as const;

@@ -36,7 +36,7 @@ export function SectionHeading({
       </p>
       <h2
         id={id}
-        className="max-w-3xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl lg:text-5xl"
+        className="max-w-3xl text-2xl min-[400px]:text-3xl font-semibold tracking-tight text-balance sm:text-4xl lg:text-5xl"
       >
         {title}
       </h2>

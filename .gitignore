@@ -77,3 +77,5 @@ desktop.ini
 # TypeScript build info
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel

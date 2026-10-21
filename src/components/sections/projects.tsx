@@ -48,12 +48,12 @@ export function Projects() {
     <section
       id="projects"
       aria-labelledby="projects-heading"
-      className="relative mx-auto w-full max-w-6xl scroll-mt-24 px-6 py-24 sm:py-32"
+      className="relative mx-auto w-full max-w-6xl scroll-mt-24 px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32"
     >
       <SectionHeading
         id="projects-heading"
         eyebrow="Featured Projects"
-        title=""
+        title="Crafted for Impact, Built for Scale."
         description="Three builds that show the range — SaaS dashboards, commerce, and real-time collaboration."
       />
 

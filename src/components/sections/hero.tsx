@@ -23,17 +23,22 @@ const itemVariants = {
 };
 
 const floatingBadges = [
-  { label: "Next.js", icon: Layers, position: "-left-2 top-[12%]", delay: 0 },
+  {
+    label: "Next.js",
+    icon: Layers,
+    position: "left-0 sm:-left-3 top-[10%]",
+    delay: 0,
+  },
   {
     label: "TypeScript",
     icon: Brackets,
-    position: "-right-3 top-[40%]",
+    position: "right-0 sm:-right-3 top-[38%]",
     delay: 1.1,
   },
   {
     label: "Node.js",
     icon: Hexagon,
-    position: "left-[4%] bottom-[10%]",
+    position: "left-[3%] sm:left-[4%] bottom-[8%] sm:bottom-[10%]",
     delay: 2.2,
   },
 ] as const;
@@ -102,81 +107,96 @@ function AmbientGlow() {
  */
 function HeroPortrait() {
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[24rem] sm:max-w-[27rem] lg:max-w-[30rem]">
-      {/* Soft copper glow behind the portrait */}
-      <div
-        aria-hidden="true"
-        className="animate-pulse-soft absolute inset-8 rounded-full bg-accent/20 blur-3xl"
-      />
-
-      {/* Slowly rotating dashed orbit ring */}
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 100 100"
-        className="absolute inset-0 h-full w-full animate-[spin_36s_linear_infinite] motion-reduce:animate-none"
-      >
-        <circle
-          cx="50"
-          cy="50"
-          r="49"
-          fill="none"
-          stroke="var(--accent)"
-          strokeOpacity="0.4"
-          strokeWidth="0.35"
-          strokeDasharray="1.2 5.5"
-          strokeLinecap="round"
+    <div className="flex flex-col items-center">
+      <div className="relative mx-auto aspect-square w-full max-w-[14.5rem] min-[380px]:max-w-[17.5rem] sm:max-w-[24rem] lg:max-w-[28rem]">
+        {/* Soft copper glow behind the portrait */}
+        <div
+          aria-hidden="true"
+          className="animate-pulse-soft absolute inset-8 rounded-full bg-accent/20 blur-3xl"
         />
-      </svg>
 
-      {/* Thin solid ring accent */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-[3.5%] rounded-full ring-1 ring-accent/25"
-      />
+        {/* Slowly rotating dashed orbit ring */}
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 100 100"
+          className="absolute inset-0 h-full w-full animate-[spin_36s_linear_infinite] motion-reduce:animate-none"
+        >
+          <circle
+            cx="50"
+            cy="50"
+            r="49"
+            fill="none"
+            stroke="var(--accent)"
+            strokeOpacity="0.4"
+            strokeWidth="0.35"
+            strokeDasharray="1.2 5.5"
+            strokeLinecap="round"
+          />
+        </svg>
 
-      {/* Portrait */}
-      <div className="absolute inset-[7%] overflow-hidden rounded-full shadow-[0_0_70px_-18px_rgba(196,123,85,0.55)] ring-1 ring-accent/40">
-        <Image
-          src={photo}
-          alt="Portrait of Moniruzzaman Tasrif"
-          fill
-          priority
-          sizes="(max-width: 640px) 70vw, (max-width: 1024px) 50vw, 40vw"
-          className="object-cover transition-transform duration-700 ease-out hover:scale-105"
-          placeholder="blur"
+        {/* Thin solid ring accent */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-[3.5%] rounded-full ring-1 ring-accent/25"
         />
+
+        {/* Portrait */}
+        <div className="absolute inset-[7%] overflow-hidden rounded-full shadow-[0_0_70px_-18px_rgba(196,123,85,0.55)] ring-1 ring-accent/40">
+          <Image
+            src={photo}
+            alt="Portrait of Moniruzzaman Tasrif"
+            fill
+            priority
+            sizes="(max-width: 640px) 70vw, (max-width: 1024px) 50vw, 40vw"
+            className="object-cover transition-transform duration-700 ease-out hover:scale-105"
+            placeholder="blur"
+          />
+        </div>
+
+        {/* Floating tech badges - shown on sm+ screens to guarantee no mobile overflow */}
+        {floatingBadges.map((badge) => (
+          <motion.span
+            key={badge.label}
+            animate={{ y: [0, -9, 0] }}
+            transition={{
+              duration: 4.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: badge.delay,
+            }}
+            className={cn(
+              "hidden sm:flex absolute z-10 items-center gap-1.5 sm:gap-2 rounded-full bg-surface/90 px-2.5 py-1.5 sm:px-3.5 sm:py-2 font-mono text-[0.65rem] sm:text-[0.7rem] tracking-wide text-foreground shadow-lg ring-1 ring-border backdrop-blur-md",
+              "hover:text-accent hover:ring-accent/40 transition-colors duration-300",
+              badge.position,
+            )}
+          >
+            <badge.icon size={14} className="text-accent" />
+            {badge.label}
+          </motion.span>
+        ))}
+
+        {/* Availability pill */}
+        <span className="absolute -bottom-2 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2.5 rounded-full bg-surface/90 px-3.5 py-1.5 sm:px-4 sm:py-2 font-mono text-[0.65rem] sm:text-[0.68rem] tracking-wide whitespace-nowrap text-muted shadow-lg ring-1 ring-border backdrop-blur-md">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75 motion-reduce:hidden" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+          </span>
+          Open to new opportunities
+        </span>
       </div>
 
-      {/* Floating tech badges */}
-      {floatingBadges.map((badge) => (
-        <motion.span
-          key={badge.label}
-          animate={{ y: [0, -9, 0] }}
-          transition={{
-            duration: 4.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: badge.delay,
-          }}
-          className={cn(
-            "absolute z-10 flex items-center gap-2 rounded-full bg-surface/90 px-3.5 py-2 font-mono text-[0.7rem] tracking-wide text-foreground shadow-lg ring-1 ring-border backdrop-blur-md",
-            "hover:text-accent hover:ring-accent/40 transition-colors duration-300",
-            badge.position,
-          )}
-        >
-          <badge.icon size={14} className="text-accent" />
-          {badge.label}
-        </motion.span>
-      ))}
-
-      {/* Availability pill */}
-      <span className="absolute -bottom-2 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2.5 rounded-full bg-surface/90 px-4 py-2 font-mono text-[0.68rem] tracking-wide whitespace-nowrap text-muted shadow-lg ring-1 ring-border backdrop-blur-md">
-        <span className="relative flex h-2 w-2">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75 motion-reduce:hidden" />
-          <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
-        </span>
-        Open to new opportunities
-      </span>
+      {/* Mobile-only inline badges centered below avatar without overflow */}
+      <div className="flex sm:hidden flex-wrap items-center justify-center gap-2 pt-5">
+        {floatingBadges.map((badge) => (
+          <span
+            key={badge.label}
+            className="inline-flex items-center gap-1.5 rounded-full bg-surface/90 px-2.5 py-1 font-mono text-[0.65rem] text-foreground ring-1 ring-border shadow-sm"
+          >
+            <badge.icon size={12} className="text-accent" />
+            {badge.label}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
@@ -186,31 +206,39 @@ export function Hero() {
     <section
       id="home"
       aria-labelledby="hero-heading"
-      className="relative flex min-h-screen items-center overflow-hidden pt-28 pb-24"
+      className="relative flex min-h-screen items-center overflow-hidden pt-20 sm:pt-28 pb-14 sm:pb-24"
     >
       <AmbientGlow />
 
-      <div className="mx-auto w-full max-w-6xl px-6">
-        <div className="grid items-center gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
+      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="grid items-center gap-10 sm:gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="flex flex-col items-start gap-8"
+            className="flex flex-col items-center text-center lg:items-start lg:text-left gap-6 sm:gap-8"
           >
             <motion.div variants={itemVariants}>
-              <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-4 py-2 font-mono text-[0.7rem] font-medium tracking-[0.25em] text-accent uppercase ring-1 ring-accent/25">
+              <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-3.5 py-1.5 sm:px-4 sm:py-2 font-mono text-[0.68rem] sm:text-[0.7rem] font-medium tracking-[0.25em] text-accent uppercase ring-1 ring-accent/25">
                 <Sparkles size={13} className="animate-pulse-soft" />
                 Full-Stack Web Developer
               </span>
             </motion.div>
 
+            <motion.h1
+              variants={itemVariants}
+              className="text-3xl min-[400px]:text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground text-balance leading-[1.18]"
+            >
+              Crafting Scalable Web Experiences Built for{" "}
+              <span className="text-gradient">Real-World Impact</span>.
+            </motion.h1>
+
             <motion.p
               variants={itemVariants}
-              className="max-w-xl text-base leading-relaxed text-muted sm:text-lg"
+              className="max-w-xl text-sm sm:text-base lg:text-lg leading-relaxed text-muted"
             >
               Hi, I&apos;m{" "}
-              <span className="font-medium text-foreground">
+              <span className="font-semibold text-foreground">
                 Moniruzzaman Tasrif
               </span>
               . I architect fast, modern, and user-focused web applications with
@@ -219,12 +247,12 @@ export function Hero() {
 
             <motion.div
               variants={itemVariants}
-              className="flex flex-wrap items-center gap-4 pt-2"
+              className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-2 w-full sm:w-auto"
             >
-              <MagneticButton>
+              <MagneticButton className="w-full sm:w-auto">
                 <Link
-                  href="#projects"
-                  className="group inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-background transition-all duration-300 hover:shadow-[0_0_35px_-6px_rgba(196,123,85,0.7)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  href="/projects"
+                  className="group inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-accent px-6 sm:px-7 py-3.5 text-sm font-semibold text-background transition-all duration-300 hover:shadow-[0_0_35px_-6px_rgba(196,123,85,0.7)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 >
                   Explore Projects
                   <ArrowRight
@@ -234,10 +262,10 @@ export function Hero() {
                 </Link>
               </MagneticButton>
 
-              <MagneticButton strength={0.25}>
+              <MagneticButton strength={0.25} className="w-full sm:w-auto">
                 <Link
-                  href="#contact"
-                  className="group inline-flex items-center gap-2 rounded-full bg-surface px-7 py-3.5 text-sm font-semibold text-foreground ring-1 ring-border transition-all duration-300 hover:text-accent hover:ring-accent/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  href="/contact"
+                  className="group inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-surface px-6 sm:px-7 py-3.5 text-sm font-semibold text-foreground ring-1 ring-border transition-all duration-300 hover:text-accent hover:ring-accent/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 >
                   <Mail size={16} />
                   Get in Touch
@@ -247,19 +275,19 @@ export function Hero() {
 
             <motion.dl
               variants={itemVariants}
-              className="flex flex-wrap gap-x-12 gap-y-6 pt-6"
+              className="grid grid-cols-3 gap-2 min-[440px]:gap-4 sm:flex sm:gap-x-12 pt-4 sm:pt-6 w-full max-w-lg lg:max-w-none justify-center lg:justify-start"
             >
               {[
                 { value: "12+", label: "Projects Shipped" },
                 { value: "100%", label: "Client Focus" },
                 { value: "3+", label: "Years Building" },
               ].map((stat) => (
-                <div key={stat.label} className="flex flex-col gap-1">
+                <div key={stat.label} className="flex flex-col gap-1 text-center sm:text-left rounded-xl bg-surface/40 p-2.5 sm:bg-transparent sm:p-0 ring-1 ring-border/60 sm:ring-0">
                   <dt className="sr-only">{stat.label}</dt>
-                  <dd className="font-mono text-2xl font-semibold text-accent sm:text-3xl">
+                  <dd className="font-mono text-xl min-[400px]:text-2xl font-semibold text-accent sm:text-3xl">
                     {stat.value}
                   </dd>
-                  <dd className="text-xs tracking-wide text-muted uppercase">
+                  <dd className="text-[0.62rem] min-[400px]:text-xs tracking-wide text-muted uppercase">
                     {stat.label}
                   </dd>
                 </div>
