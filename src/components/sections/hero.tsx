@@ -275,14 +275,14 @@ export function Hero() {
               </MagneticButton>
             </motion.div>
 
-            <motion.dl
+            {/* <motion.dl
               variants={itemVariants}
               className="grid grid-cols-3 gap-2 min-[440px]:gap-4 sm:flex sm:gap-x-12 pt-4 sm:pt-6 w-full max-w-lg lg:max-w-none justify-center lg:justify-start"
             >
               {[
-                { value: "12+", label: "Projects Shipped" },
-                { value: "100%", label: "Client Focus" },
-                { value: "3+", label: "Years Building" },
+                // { value: "12+", label: "Projects Shipped" },
+                // { value: "100%", label: "Client Focus" },
+                // { value: "3+", label: "Years Building" },
               ].map((stat) => (
                 <div key={stat.label} className="flex flex-col gap-1 text-center sm:text-left rounded-xl bg-surface/40 p-2.5 sm:bg-transparent sm:p-0 ring-1 ring-border/60 sm:ring-0">
                   <dt className="sr-only">{stat.label}</dt>
@@ -294,7 +294,7 @@ export function Hero() {
                   </dd>
                 </div>
               ))}
-            </motion.dl>
+            </motion.dl> */}
           </motion.div>
 
           {/* Portrait column — first on mobile, right on desktop */}
